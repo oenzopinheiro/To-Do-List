@@ -1,0 +1,10 @@
+/* Substituir === por ≥ */
+.mtk15 {
+    content: '≥';
+  }
+  
+  /* Substituir => por → */
+  .mtk13 {
+    content: '→';
+  }
+  

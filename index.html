@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/custom.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>To-Do-List</title>
+</head>
+<body>
+    <header>
+        <div class="container-header">
+            <img src="/Assets/Logo.png">
+        </div>
+    </header>
+<main>
+    <div class="tasksContainer">
+        <div class="list">
+            
+            <div class="div-button">
+                <div class="statusOne">
+                    <p class="text-status">ABERTO</p>            
+                </div>
+                <button onclick="createNewTask('open')" class="button-plus">+</button>
+            </div>
+            <div class="listOne">
+
+            </div>
+        </div>
+        <div class="list">
+            <div class="div-button">
+                <div class="statusTwo">
+                    <p class="text-status">EM ANDAMENTO</p>            
+                </div>
+                 <button onclick="createNewTask('inProgress')" class="button-plus">+</button>
+            </div>
+            <div class="listTwo">
+
+            </div>
+        </div>
+
+        <div class="list">
+            <div class="div-button">
+                <div class="statusThree">
+                    <p class="text-status">FINALIZADO</p>            
+                </div>
+            </div>
+            <div class="listThree">
+
+                <div class="addTasks">
+                    
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div id="fade" class="hide"></div>
+    <div id="modal" class="hide"></div>
+
+</main>
+
+
+</body>
+<script src="/main.js"></script>
+</html>
+
+
+
