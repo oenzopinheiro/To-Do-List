@@ -33,9 +33,47 @@ function createNewTask(listToAdd) {
 
 }
 
+function toggleModalSelect() {
+    const modalSelect = document.querySelector('.modal-select');
+    modalSelect.classList.toggle('hide');
+}
+
+function changeStatusCard(id, listToRemove, listToAdd) {
+
+    let elementToAdd;
+
+    if(listToRemove === 'open') {
+        elementToAdd = openTasks.find(element  => element.id === id);
+        openTasks = openTasks.filter(element  => !( element.id === id));
+    }
+
+    if(listToRemove === 'inProgress') {
+        elementToAdd =  inProgresTasks.find(element  => element.id === id);
+        inProgresTasks = inProgresTasks.filter(element  => !( element.id === id));
+    }
+    
+    if(listToRemove === 'finished') {
+        elementToAdd =  finishedTasks.find(element  => element.id === id);
+        finishedTasks = finishedTasks.filter(element  => !( element.id === id));
+    }
+
+    if(listToAdd === 'open') {
+        openTasks.push(elementToAdd);
+    }
+
+    if(listToAdd === 'inProgress') {
+        inProgresTasks.push(elementToAdd);
+    }
+    
+    if(listToAdd === 'finished') {
+        finishedTasks.push(elementToAdd);
+    } 
+
+}
+
 function openModal(id, listToAdd) {
 
-    let  tagModal = "";
+    let tagModal = "";
     let color = ""
     if (listToAdd === 'open') {
         tagModal = 'ABERTO '
@@ -53,21 +91,41 @@ function openModal(id, listToAdd) {
     }
     
     modal.innerHTML = `
-    <div class="modal-header">
-            <div class="status ${color}">
+        <div class="modal-header">
+            <div class="status ${color}"  onclick="toggleModalSelect()">
                 <p class="text-status">${tagModal}</p>            
             </div>
             <button id="close-modal" onclick="updateTask(${id}
             , '${listToAdd}')">x</button>
         </div>
-        <div class="modal-body">
-        <textarea id="task-title" placeholder="TÍTULO"></textarea>
-        <div class="line-description">
-        <div class="div-text-line">
-            <p class="text-line">Sua tarefas</p>
+        <div class="modal-select">
+            <div class="select-option">
+                <span>Selecione uma opção</span>
             </div>
-            <div class="lineOne"></div>
-            <div class="lineTwo"></div>
+            <div class="select-option" onclick="changeStatusCard('${id}', '${listToAdd}', 'open')">
+                <div class="status red size">
+                    <p class="text-status">ABERTO</p>            
+                </div>
+            </div>
+            <div class="select-option" onclick="changeStatusCard('${id}', '${listToAdd}', 'inProgress')">
+                <div class="status orange size">
+                    <p class="text-status">EM ANDAMENTO</p>            
+                </div>
+            </div>
+            <div class="select-option" onclick="changeStatusCard('${id}', '${listToAdd}', 'finished')">
+                <div class="status green size">
+                    <p class="text-status">FINALIZADO</p>            
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+             <textarea id="task-title" placeholder="TÍTULO"></textarea>
+            <div class="line-description">
+                <div class="div-text-line">
+                    <p class="text-line">Sua tarefas</p>
+                </div>
+                <div class="lineOne"></div>
+                <div class="lineTwo"></div>
             </div>
         <textarea id="task-description" placeholder="Digite para começar"></textarea>
         </div>
@@ -169,24 +227,19 @@ function init() {
         finishedTasks = JSON.parse(finishedTasksData);
     }
 
-    // Now, you have the tasks loaded from local storage
     renderOpenList();
     renderInProgressList();
-    // You can add rendering for the finished tasks as well, if needed
+
 }
 
-// Call init() to load tasks when the page loads
-init();
-
-
-function renderOpenList() {
+function renderOpenList(id) {
     let list = "";
 
     openTasks.forEach((element) => {
         list += `
-        <div class="openTasks" onclick="openModal(${element.id}, 'open')" draggable="true">
-            <p class="text-description">${element.description}</p>
-            <div class="red-area">
+        <div class="card-task" onclick="openModal(${element.id}, 'open')">
+            <p class="card-description">${element.description}</p>
+            <div class="label-task red">
                 <img src="/Assets/img-title.png" class="img-title">
                 <h3 class="title">${element.title}</h3>
             </div>
@@ -204,27 +257,24 @@ function renderInProgressList() {
 
     inProgresTasks.forEach((element) => {
         list += `
-        <div class="inProgressTasks" onclick="openModal(${element.id}, 'inProgress')" draggable="true">
-            <div class="green-area" ></div>
-            <p class="description">${element.description}</p>
-            <div class="footer-title">
+        <div class="card-task" onclick="openModal(${element.id}, 'inProgress')">
+            <p class="card-description">${element.description}</p>
+            <div class="label-task orange">
                 <img src="/Assets/img-title.png" class="img-title">
                 <h3 class="title">${element.title}</h3>
             </div>
         </div>
         `;
     });
+    
 
     divListTwo.innerHTML = list;
 
-    // implementar LocalStorage - Dica AQUI - DiCA Salvar Arrays
 }
 
-// implementar recupearar do LocalStorage - Dica fazer fuinção init() que roda na aberrtura da pagina
-// Setar valor dessas variaveis com o que está no localStorage
-// let openTasks = [];
-// let inProgresTasks = [];
-// let finishedTasks = [];
 
-// Como implementar drag n drop com html e js 
+//clica na tag do cabeçalho do modal vai chamar uma função que faz aparecer ou escondel o modal-select - dica: igual a fução de chamar o modal - add or remove class
+// clicar no tag dentro do select tira o elemento atual do array que ele está e joga no que foi clicado;
+// chamar closeModal quando clicar fora do modal
 
+init();
