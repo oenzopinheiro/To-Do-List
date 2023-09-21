@@ -307,10 +307,4 @@ function renderFinishedList() {
     divListThree.innerHTML = list;
 }
 
-
-
-//clica na tag do cabeçalho do modal vai chamar uma função que faz aparecer ou escondel o modal-select - dica: igual a fução de chamar o modal - add or remove class
-// clicar no tag dentro do select tira o elemento atual do array que ele está e joga no que foi clicado;
-// chamar closeModal quando clicar fora do modal
-
 init();
