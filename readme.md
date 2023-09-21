@@ -14,12 +14,12 @@ Clone este repositório para o seu computador:
 
 bash
 Copy code
-git clone https://github.com/seu-usuario/nome-do-projeto.git
+git clone https://github.com/oenzopinheiro/To-Do-List
 Navegue até o diretório do projeto:
 
 bash
 Copy code
-cd nome-do-projeto
+cd To-Do-List
 Instale as dependências do projeto:
 
 bash
@@ -30,7 +30,7 @@ Inicie o servidor de desenvolvimento:
 bash
 Copy code
 npm start
-Abra seu navegador e acesse http://localhost:3000 para visualizar o aplicativo em execução.
+Abra seu navegador e acesse http://localhost:5500 para visualizar o aplicativo em execução.
 
 ⚙️ Executando os testes
 Para executar os testes automatizados deste sistema, utilize o seguinte comando:
